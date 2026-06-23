@@ -75,6 +75,8 @@ let package = Package(
 // we can depend on local versions of our dependencies instead of fetching them remotely.
 if ProcessInfo.processInfo.environment["SWIFTCI_USE_LOCAL_DEPS"] == nil {
     package.dependencies += [
+        // CryptoExtras needs the fork's thread-specific storage backend on WASI.
+        // Repin only after verifying upstream compatibility and native and WASI builds.
         .package(
             url: "https://github.com/rorkai/swift-crypto.git",
             revision: "f171fca4c1718d685c495350fe9136a3fda6f262"
